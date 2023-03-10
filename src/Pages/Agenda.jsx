@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Footer, url, Lines3, Event } from "./_index.js";
+import Navbar from "../Components/Navbar/Navbar";
+import Footer from "../Components/Footer/Footer";
+import url from "../url";
+import Lines3 from "../Components/Lines/Lines3";
+import Event from "../Components/Event/Event";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -25,7 +29,6 @@ const Agenda = () => {
   ]);
   const date = new Date();
   const thisYear = date.getFullYear();
-  // const thisYear = 2021
   const years = [2023, 2022, 2021, 2020, 2019, 2018];
   const months = [
     "Janvier",
@@ -44,9 +47,9 @@ const Agenda = () => {
 
   useEffect(() => {
     axios
-      .get(`${url}/events`)
+      .get(`${url}/events/events`)
       .then((res) => {
-        let eventsArray = res.data.filter((event) => event.title !== "Test");
+        const eventsArray = res.data;
         if (res.status === 200) {
           setEvents(eventsArray);
           let array = [];
@@ -63,13 +66,11 @@ const Agenda = () => {
           arrayEventsYear.forEach((event) => {
             event.dates.forEach((show) => {
               if (
-                !arrayEventsThisYear[
-                  new Date(show.startDate).getMonth()
-                ].filter((item) => item._id === event._id).length
+                !arrayEventsThisYear[new Date(show.startDate).getMonth()].filter(
+                  (item) => item._id === event._id
+                ).length
               ) {
-                arrayEventsThisYear[new Date(show.startDate).getMonth()].push(
-                  event
-                );
+                arrayEventsThisYear[new Date(show.startDate).getMonth()].push(event);
               }
             });
           });
@@ -80,7 +81,7 @@ const Agenda = () => {
       .catch((err) => {
         console.log("error:", err);
       });
-  }, []);
+  });
 
   return (
     <div>
@@ -99,11 +100,11 @@ const Agenda = () => {
               {eventsThisYear.length ? (
                 <ul className="no-list-style">
                   {eventsThisYear.map((month, i) => (
-                    <li key={i} className="event">
+                    <li key={`Month${i}`} className="event">
                       {month.length ? (
                         <div className="month">
                           <h2 className="event-month">
-                            {months[i]} {thisYear}{" "}
+                            {months[i]} {thisYear}
                           </h2>
                           {month.map((show) => (
                             <Event key={show._id} event={show} index={i} />
@@ -117,22 +118,16 @@ const Agenda = () => {
                 </ul>
               ) : (
                 <div className="agenda-loading">
-                  <img
-                    src="/images/loading-buffering.gif"
-                    alt="Loading data ..."
-                  />
+                  <img src="/images/loading-buffering.gif" alt="Loading data ..." />
                 </div>
               )}
             </div>
 
             <div className="past-events">
               <h3>Dates passées</h3>
-              {years.map((year) =>
+              {years.map((year, i) =>
                 year < thisYear && eventsYear.includes(year) ? (
-                  <Accordion
-                    key={Math.floor(Math.random() * 10000)}
-                    className="accordion"
-                  >
+                  <Accordion key={`year${i}`} className="accordion">
                     <AccordionSummary
                       expandIcon={<IoIosMore className="icon" />}
                       aria-controls="panel1a-content"
@@ -140,61 +135,31 @@ const Agenda = () => {
                     >
                       <h3>{year}</h3>
                     </AccordionSummary>
-                    {events.map((event) =>
-                      new Date(event.dates[0].startDate).getFullYear() ===
-                      year ? (
-                        <AccordionDetails
-                          key={Math.floor(Math.random() * 10000)}
-                          className="event-details"
-                        >
+                    {events.map((event, i) =>
+                      new Date(event.dates[0].startDate).getFullYear() === year ? (
+                        <AccordionDetails key={`event${i}`} className="event-details">
                           <h2>{event.title}</h2>
                           <div className="event-date">
                             <p>
                               {new Date(event.dates[0].startDate).getDate() ===
                               new Date(event.dates[0].endDate).getDate() ? (
                                 <span>
-                                  Le{" "}
-                                  {new Date(event.dates[0].startDate).getDate()}{" "}
-                                  {
-                                    months[
-                                      new Date(
-                                        event.dates[0].startDate
-                                      ).getMonth()
-                                    ]
-                                  }{" "}
+                                  Le {new Date(event.dates[0].startDate).getDate()}
+                                  {months[new Date(event.dates[0].startDate).getMonth()]}
                                 </span>
                               ) : (
                                 <span>
-                                  Du{" "}
-                                  {new Date(event.dates[0].startDate).getDate()}
-                                  {new Date(
-                                    event.dates[0].startDate
-                                  ).getMonth() !==
-                                  new Date(
-                                    event.dates[0].endDate
-                                  ).getMonth() ? (
+                                  Du {new Date(event.dates[0].startDate).getDate()}
+                                  {new Date(event.dates[0].startDate).getMonth() !==
+                                  new Date(event.dates[0].endDate).getMonth() ? (
                                     <span>
-                                      {" "}
-                                      {
-                                        months[
-                                          new Date(
-                                            event.dates[0].startDate
-                                          ).getMonth()
-                                        ]
-                                      }{" "}
+                                      {months[new Date(event.dates[0].startDate).getMonth()]}
                                     </span>
                                   ) : (
                                     <> </>
                                   )}
-                                  au{" "}
-                                  {new Date(event.dates[0].endDate).getDate()}{" "}
-                                  {
-                                    months[
-                                      new Date(
-                                        event.dates[0].endDate
-                                      ).getMonth()
-                                    ]
-                                  }
+                                  au {new Date(event.dates[0].endDate).getDate()}
+                                  {months[new Date(event.dates[0].endDate).getMonth()]}
                                 </span>
                               )}
                             </p>
@@ -206,29 +171,25 @@ const Agenda = () => {
                                 <span>{event.dates[0].address},</span>
                               ) : (
                                 <></>
-                              )}{" "}
-                              {event.dates[0].city ? (
-                                event.dates[0].city
-                              ) : (
-                                <></>
                               )}
+                              {event.dates[0].city ? event.dates[0].city : <></>}
                             </p>
                           </div>
                         </AccordionDetails>
                       ) : (
-                        <></>
+                        <div key={`events${i}`}></div>
                       )
                     )}
                   </Accordion>
                 ) : (
-                  <></>
+                  <div key={`year${i}`}></div>
                 )
               )}
             </div>
           </div>
         ) : (
           <div className="loading-content">
-            <img src="/images/loading.gif" alt="loading" q />
+            <img src="/images/loading.gif" alt="loading" />
           </div>
         )}
       </div>
