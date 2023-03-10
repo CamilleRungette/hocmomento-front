@@ -1,5 +1,5 @@
 .show-main {
-  padding-top: 100px !important;
+  padding-top: $navbarHeight + 100px !important;
   margin: auto;
   padding: 4rem 4rem 0 4rem;
   position: relative;
@@ -43,7 +43,7 @@
     height: 70px;
     width: 55%;
     position: absolute;
-    top: 0;
+    top: $navbarHeight + 30px;
   }
 
   .show-description {

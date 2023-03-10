@@ -23,7 +23,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get(`${url}/shows`)
+      .get(`${url}/shows/shows`)
       .then((res) => {
         let content = (
           <ul className="no-list-style menu-list popover-list navbar-list">
@@ -50,7 +50,7 @@ const Navbar = () => {
       });
 
     axios
-      .get(`${url}/actions`)
+      .get(`${url}/actions/actions`)
       .then((res) => {
         let content = (
           <ul className="no-list-style menu-list popover-list navbar-list">
@@ -74,7 +74,7 @@ const Navbar = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [size]);
 
   useLayoutEffect(() => {
     function updateSize() {
