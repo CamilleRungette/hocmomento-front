@@ -2,12 +2,17 @@ import React from "react";
 import NavbarHome from "../Components/Navbar/NavbarHome";
 import Lines1 from "../Components/Lines/Lines1";
 import Lines2 from "../Components/Lines/Lines2";
+import CarouselComp from "../Components/Carousel/Carousel";
+import HomeFooter from "../Components/Footer/HomeFooter";
+import { HomeData } from "../Components/Carousel/HomeData";
 
 const Home = () => {
   return (
     <div className="home-main">
       <NavbarHome />
-      <div className="carousel-home-div">{/* <Carousel gallery={CarouselData} /> */}</div>
+      <div className="carousel-home-div">
+        <CarouselComp gallery={HomeData} />
+      </div>
 
       <div className="home-lines1">
         <Lines1 />
@@ -24,7 +29,7 @@ const Home = () => {
         <Lines2 />
       </div>
 
-      {/* <HomeFooter /> */}
+      <HomeFooter />
     </div>
   );
 };
