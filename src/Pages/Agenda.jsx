@@ -29,7 +29,7 @@ const Agenda = () => {
   ]);
   const date = new Date();
   const thisYear = date.getFullYear();
-  const years = [2023, 2022, 2021, 2020, 2019, 2018];
+  const years = [2027, 2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018];
   const months = [
     "Janvier",
     "Février",
@@ -81,7 +81,7 @@ const Agenda = () => {
       .catch((err) => {
         console.log("error:", err);
       });
-  });
+  }, [eventsThisYear, thisYear]);
 
   return (
     <div>
@@ -126,7 +126,7 @@ const Agenda = () => {
             <div className="past-events">
               <h3>Dates passées</h3>
               {years.map((year, i) =>
-                year < thisYear && eventsYear.includes(year) ? (
+                year <= thisYear ? (
                   <Accordion key={`year${i}`} className="accordion">
                     <AccordionSummary
                       expandIcon={<IoIosMore className="icon" />}
@@ -135,51 +135,46 @@ const Agenda = () => {
                     >
                       <h3>{year}</h3>
                     </AccordionSummary>
-                    {events.map((event, i) =>
-                      new Date(event.dates[0].startDate).getFullYear() === year ? (
-                        <AccordionDetails key={`event${i}`} className="event-details">
-                          <h2>{event.title}</h2>
-                          <div className="event-date">
-                            <p>
-                              {new Date(event.dates[0].startDate).getDate() ===
-                              new Date(event.dates[0].endDate).getDate() ? (
-                                <span>
-                                  Le {new Date(event.dates[0].startDate).getDate()}
-                                  {months[new Date(event.dates[0].startDate).getMonth()]}
-                                </span>
-                              ) : (
-                                <span>
-                                  Du {new Date(event.dates[0].startDate).getDate()}
-                                  {new Date(event.dates[0].startDate).getMonth() !==
-                                  new Date(event.dates[0].endDate).getMonth() ? (
+                    {events.map((event, i) => (
+                      <AccordionDetails key={`event${i}`} className="event-details">
+                        <h2>{event.title}</h2>
+                        {event.dates.map(
+                          (date, i) =>
+                            date.startDate.includes(year) && (
+                              <div className="event-date" key={i}>
+                                <p>
+                                  {new Date(date.startDate).getDate() ===
+                                  new Date(date.endDate).getDate() ? (
                                     <span>
-                                      {months[new Date(event.dates[0].startDate).getMonth()]}
+                                      Le {new Date(date.startDate).getDate()}{" "}
+                                      {months[new Date(date.startDate).getMonth()]}
                                     </span>
                                   ) : (
-                                    <> </>
+                                    <span>
+                                      Du {new Date(date.startDate).getDate()}
+                                      {new Date(date.startDate).getMonth() !==
+                                      new Date(date.endDate).getMonth() ? (
+                                        <span>{months[new Date(date.startDate).getMonth()]}</span>
+                                      ) : (
+                                        <> </>
+                                      )}
+                                      au {new Date(date.endDate).getDate()}
+                                      {months[new Date(date.endDate).getMonth()]}
+                                    </span>
                                   )}
-                                  au {new Date(event.dates[0].endDate).getDate()}
-                                  {months[new Date(event.dates[0].endDate).getMonth()]}
-                                </span>
-                              )}
-                            </p>
+                                </p>
 
-                            <p>{event.dates[0].place} </p>
+                                <p>{date.place} </p>
 
-                            <p>
-                              {event.dates[0].address ? (
-                                <span>{event.dates[0].address},</span>
-                              ) : (
-                                <></>
-                              )}
-                              {event.dates[0].city ? event.dates[0].city : <></>}
-                            </p>
-                          </div>
-                        </AccordionDetails>
-                      ) : (
-                        <div key={`events${i}`}></div>
-                      )
-                    )}
+                                <p>
+                                  {date.address ? <span>{date.address},</span> : <></>}
+                                  {date.city ? date.city : <></>}
+                                </p>
+                              </div>
+                            )
+                        )}
+                      </AccordionDetails>
+                    ))}
                   </Accordion>
                 ) : (
                   <div key={`year${i}`}></div>
