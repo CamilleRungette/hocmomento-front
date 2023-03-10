@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Alert from "../Alert/Alert";
 import url from "../../url";
 import axios from "axios";
-var Recaptcha = require("react-recaptcha");
+import ReCAPTCHA from "react-google-recaptcha";
 
 const HomeFooter = () => {
   const alertRef = useRef();
@@ -57,36 +57,36 @@ const HomeFooter = () => {
   const saveMessage = (e) => {
     e.preventDefault();
     if (values.name && values.email && values.message) {
-      // if (isVerified) {
-      axios
-        .post(`${url}/messages/create-message`, values)
-        .then(() => {
-          setAlert({
-            severity: "success",
-            message: "Votre message a bien été envoyé",
+      if (isVerified) {
+        axios
+          .post(`${url}/messages/create-message`, values)
+          .then(() => {
+            setAlert({
+              severity: "success",
+              message: "Votre message a bien été envoyé",
+            });
+            alertRef.current.showAlert();
+            setIsVerified(false);
+            setValues({
+              name: "",
+              email: "",
+              message: "",
+            });
+          })
+          .catch((err) => {
+            setAlert({
+              severity: "error",
+              message: "Erreur avec l'envoi de votre message, veuillez retenter plus tard",
+            });
+            alertRef.current.showAlert();
           });
-          alertRef.current.showAlert();
-          // setIsVerified(false);
-          setValues({
-            name: "",
-            email: "",
-            message: "",
-          });
-        })
-        .catch((err) => {
-          setAlert({
-            severity: "error",
-            message: "Erreur avec l'envoi de votre message, veuillez retenter plus tard",
-          });
-          alertRef.current.showAlert();
+      } else {
+        setAlert({
+          severity: "error",
+          message: "Vous devez valider la captcha",
         });
-      // } else {
-      //   setAlert({
-      //     severity: "error",
-      //     message: "Vous devez valider la captcha",
-      //   });
-      //   alertRef.current.showAlert();
-      // }
+        alertRef.current.showAlert();
+      }
     } else {
       setAlert({
         severity: "warning",
@@ -196,12 +196,7 @@ const HomeFooter = () => {
                 onChange={handleState("message")}
               />
               <div className="captcha">
-                <Recaptcha
-                  sitekey={process.env.REACT_APP_SITE_CAPTCHA}
-                  render="explicit"
-                  verifyCallback={verifyCallback}
-                  size={"normal"}
-                />
+                <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_CAPTCHA} onChange={verifyCallback} />
               </div>
               <button className="primary-button" onClick={(e) => saveMessage(e)}>
                 Envoyer
