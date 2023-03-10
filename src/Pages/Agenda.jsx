@@ -81,7 +81,8 @@ const Agenda = () => {
       .catch((err) => {
         console.log("error:", err);
       });
-  }, [eventsThisYear, thisYear]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
