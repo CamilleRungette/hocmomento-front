@@ -31,20 +31,15 @@ const NavbarHome = () => {
       .then((res) => {
         let content = (
           <ul className="no-list-style menu-list popover-list navbar-list">
-            {res.data.map((show) =>
-              show.title !== "Test" ? (
-                <li
-                  onClick={size[0] > 1000 ? hidePopoverShows : closeMenu}
-                  key={show._id}
-                  className="pointer"
-                >
-                  {" "}
-                  <Link to={`/spectacle/${show._id}`}>{show.title}</Link>{" "}
-                </li>
-              ) : (
-                <></>
-              )
-            )}
+            {res.data.map((show) => (
+              <li
+                onClick={size[0] > 1000 ? hidePopoverShows : closeMenu}
+                key={show._id}
+                className="pointer"
+              >
+                <Link to={`/spectacle/${show._id}`}>{show.title}</Link>
+              </li>
+            ))}
           </ul>
         );
         setShowsContent(content);
@@ -56,24 +51,20 @@ const NavbarHome = () => {
     axios.get(`${url}/actions/actions`).then((res) => {
       let content = (
         <ul className="no-list-style menu-list popover-list">
-          {res.data.map((action) =>
-            action.place !== "Test" ? (
-              <li
-                onClick={size[0] > 1000 ? hidePopoverActions : closeMenu}
-                key={action._id}
-                className="pointer"
-              >
-                <Link to={`/action-culturelle/${action._id}`}> {action.place} </Link>
-              </li>
-            ) : (
-              <></>
-            )
-          )}
+          {res.data.map((action) => (
+            <li
+              onClick={size[0] > 1000 ? hidePopoverActions : closeMenu}
+              key={action._id}
+              className="pointer"
+            >
+              <Link to={`/action-culturelle/${action._id}`}> {action.place} </Link>
+            </li>
+          ))}
         </ul>
       );
       setActionsContent(content);
     });
-  }, []);
+  }, [size]);
 
   useLayoutEffect(() => {
     function updateSize() {
@@ -151,7 +142,7 @@ const NavbarHome = () => {
         <ul className="navbar-list no-list-style flex-space-between">
           <li className="pointer home-bold">
             <Link className="link" to="/compagnie">
-              Compagnie{" "}
+              Compagnie
             </Link>
           </li>
           <li className="pointer home-bold popover-div" onMouseEnter={showPopoverShows}>
@@ -168,7 +159,7 @@ const NavbarHome = () => {
           </li>
           <li className="pointer home-bold">
             <Link className="link" to="/agenda">
-              Agenda{" "}
+              Agenda
             </Link>
           </li>
         </ul>
@@ -179,7 +170,7 @@ const NavbarHome = () => {
             <ul className="menu-list no-list-style navbar-list">
               <li onClick={closeMenu} id="company" className="pointer">
                 <Link className="link" to="/compagnie">
-                  Compagnie{" "}
+                  Compagnie
                 </Link>
               </li>
               <Accordion className="accordion">
@@ -205,7 +196,7 @@ const NavbarHome = () => {
               </Accordion>
               <li onClick={closeMenu} className="pointer">
                 <Link className="link" to="/agenda">
-                  Agenda{" "}
+                  Agenda
                 </Link>
               </li>
             </ul>
