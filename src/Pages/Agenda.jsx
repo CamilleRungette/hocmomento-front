@@ -12,7 +12,6 @@ import { IoIosMore } from "react-icons/io";
 
 const Agenda = () => {
   const [events, setEvents] = useState([]);
-  const [eventsYear, setEventsYear] = useState([]);
   const [eventsThisYear, setEventsThisYear] = useState([
     [],
     [],
@@ -60,7 +59,6 @@ const Agenda = () => {
               arrayEventsYear.push(event);
             }
           });
-          setEventsYear(array);
 
           let arrayEventsThisYear = [...eventsThisYear];
           arrayEventsYear.forEach((event) => {
