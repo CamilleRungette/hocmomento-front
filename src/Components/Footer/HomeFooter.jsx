@@ -57,36 +57,36 @@ const HomeFooter = () => {
   const saveMessage = (e) => {
     e.preventDefault();
     if (values.name && values.email && values.message) {
-      if (isVerified) {
-        axios
-          .post(`${url}/message`, values)
-          .then((res) => {
-            setAlert({
-              severity: "success",
-              message: "Votre message a bien été envoyé",
-            });
-            alertRef.current.showAlert();
-            setIsVerified(false);
-            setValues({
-              name: "",
-              email: "",
-              message: "",
-            });
-          })
-          .catch((err) => {
-            setAlert({
-              severity: "error",
-              message: "Erreur avec l'envoi de votre message, veuillez retenter plus tard",
-            });
-            alertRef.current.showAlert();
+      // if (isVerified) {
+      axios
+        .post(`${url}/messages/create-message`, values)
+        .then(() => {
+          setAlert({
+            severity: "success",
+            message: "Votre message a bien été envoyé",
           });
-      } else {
-        setAlert({
-          severity: "error",
-          message: "Vous devez valider la captcha",
+          alertRef.current.showAlert();
+          // setIsVerified(false);
+          setValues({
+            name: "",
+            email: "",
+            message: "",
+          });
+        })
+        .catch((err) => {
+          setAlert({
+            severity: "error",
+            message: "Erreur avec l'envoi de votre message, veuillez retenter plus tard",
+          });
+          alertRef.current.showAlert();
         });
-        alertRef.current.showAlert();
-      }
+      // } else {
+      //   setAlert({
+      //     severity: "error",
+      //     message: "Vous devez valider la captcha",
+      //   });
+      //   alertRef.current.showAlert();
+      // }
     } else {
       setAlert({
         severity: "warning",
@@ -124,8 +124,7 @@ const HomeFooter = () => {
             <h2> Réseaux sociaux</h2>
             <ul className="footer-home-list no-list-style">
               <li>
-                {" "}
-                <AiFillFacebook className="network-icon" color="#555555" />{" "}
+                <AiFillFacebook className="network-icon" color="#555555" />
                 <a
                   className="link network"
                   href="https://www.facebook.com/hoc.momento"
@@ -133,11 +132,10 @@ const HomeFooter = () => {
                   rel="noopener noreferrer"
                 >
                   Facebook
-                </a>{" "}
+                </a>
               </li>
               <li>
-                {" "}
-                <AiOutlineInstagram className="network-icon instagram" color="#555555" />{" "}
+                <AiOutlineInstagram className="network-icon instagram" color="#555555" />
                 <a
                   className="link network"
                   href="https://www.instagram.com/hoc.momento"
@@ -145,11 +143,10 @@ const HomeFooter = () => {
                   rel="noopener noreferrer"
                 >
                   Instagram
-                </a>{" "}
+                </a>
               </li>
               <li>
-                {" "}
-                <AiFillYoutube className="network-icon" color="#555555" />{" "}
+                <AiFillYoutube className="network-icon" color="#555555" />
                 <a
                   className="link network"
                   href="https://www.youtube.com/channel/UCbv1zETvGrn4UORGvpyhZMA"
@@ -157,14 +154,13 @@ const HomeFooter = () => {
                   rel="noopener noreferrer"
                 >
                   Youtube
-                </a>{" "}
+                </a>
               </li>
               <li>
-                {" "}
-                <AiOutlineMail className="network-icon" color="#555555" />{" "}
+                <AiOutlineMail className="network-icon" color="#555555" />
                 <span className="network pointer" onClick={copyLink}>
                   hocmomentotheatre@gmail.com
-                </span>{" "}
+                </span>
               </li>
             </ul>
           </div>
