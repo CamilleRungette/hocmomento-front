@@ -1,0 +1,137 @@
+@import "../commons/colors.scss";
+
+.lines1{
+  height: 100%;
+  position: relative;
+  
+  .l1{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 10%;
+    top: 0;
+    left: 10%
+  };
+
+  .l2{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 42%;
+    right: 0;
+    top: 20%
+  };
+
+  .l3{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 20%;
+    top: 30%;
+    left: 15%;
+  };
+
+  .l4{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 60%;
+    top: 70%;
+    right: 30px
+  };
+
+  .l5{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 40%;
+    bottom: 0;
+    left: 0;
+  };
+};
+
+.lines2{
+  position: relative;
+  height: 100%;
+
+  .l1{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 35%;
+    top: 0;
+    right: 20%;
+  };
+
+  .l2{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 70%;
+    top: 20%;
+    left: 0;
+  };
+
+  .l3{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 10%;
+    top: 40%;
+    right: 23%;
+  };
+
+  .l4{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 30%;
+    top: 60%;
+    right: 0
+  };
+
+  .l5{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 50%;
+    top: 80%;
+    left: 25%;
+  };
+
+  .l6{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 40%;
+    top: 100%;
+    left: 0;
+  };
+};
+
+.lines3{
+  position: relative;
+  height: 100%;
+
+  .l1{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 35%;
+    top: 10%;
+    right: 0%;
+  };
+
+  .l2{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 15%;
+    top: 25%;
+    left: 10%;
+  };
+
+  .l3{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    right: 20%;
+  };
+
+  .l4{
+    border-top: 1px solid $primary;
+    position: absolute;
+    width: 35%;
+    top: 75%;
+    left: 0
+  };
+
+};

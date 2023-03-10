@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap");
+@import "./commons/_index.scss";
+@import "./components/_index.scss";
+@import "./pages/index.scss";
+
+body {
+  margin: 0 !important;
+  font-family: "Josefin Sans", sans-serif !important;
+}
+
+button {
+  font-family: "Josefin Sans", sans-serif !important;
+}
+
+p {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: lighter;
+}

@@ -1,0 +1,52 @@
+@import "../commons/colors.scss";
+
+.no-list-style{
+  list-style: none;
+  padding-left: 0;
+};
+
+.btn-no-style{
+  border: none;
+  background-color: transparent;
+}
+
+.flex-space-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+};
+
+.flex-space-around{
+  display: flex;
+  justify-content: space-around;
+};
+
+.flex-space-evenly{
+  display: flex;
+  justify-content:space-evenly
+};
+
+.pointer{
+  cursor: pointer;
+};
+
+.fullwidth{
+  width: 100%;
+};
+
+.bold {
+  font-weight: bolder;
+};
+
+.main-app{
+  position: relative;
+};
+
+.link{
+  text-decoration: none;
+  color: inherit !important;
+};
+
+.loading-content{
+  text-align: center
+};

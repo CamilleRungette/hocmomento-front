@@ -1,0 +1,43 @@
+.carousel-comp-main {
+  width: 60vw !important;
+  height: 75vh;
+
+  .carousel {
+    .paper-carousel {
+      height: 75vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      box-shadow: none;
+
+      img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 100vw !important;
+    margin-left: -10vw;
+    height: 65vh;
+
+    .carousel {
+      .paper-carousel {
+        height: 65vh;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .carousel {
+      height: 55vh;
+
+      .paper-carousel {
+        height: 55vh;
+      }
+    }
+  }
+}

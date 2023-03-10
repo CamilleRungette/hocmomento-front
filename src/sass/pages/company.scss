@@ -1,0 +1,97 @@
+@import "../commons/colors.scss";
+
+.company-main{
+  margin-top: 100px;
+  padding: 3rem 4rem;
+  position: relative;
+  min-width: 250px;
+
+  .company-lines1{
+    height: 70px;
+    width: 35%;
+    position: absolute;
+  };
+
+  h1{
+    margin-left: 45%;
+  };
+
+  p {
+    width: 100%;
+    padding: 0;
+    text-align: justify;
+    // clear: left;
+
+    .picture-div{
+      width: 45%;
+      float: left;
+      margin-top: 20px;
+      
+      img{
+        width: 95%;
+      }
+    };
+  };
+
+  @media screen and (max-width: 1600px) {
+    .company-lines1{
+      width: 40%;
+    };
+
+    h1{
+      margin-left: 50%;
+    };
+
+    p{
+      .picture-div{
+        width: 50%;
+      };
+    };
+  };
+
+  @media screen and (max-width: 940px) {
+    .company-lines1{
+      width: 80%;
+      height: 60px;
+      position: absolute;
+      top: 10px;
+    };
+
+    .title{
+      width: 100%;
+      text-align: center;
+      margin-top: 70px;
+
+      h1{
+        margin: auto;
+      };
+    };
+
+    p{
+      .picture-div{
+        float: none;
+        
+        img{
+          width: 100%; 
+          margin-bottom: 20px
+        };
+      };
+    };
+  };
+};
+
+.company-lines2{
+  height: 80px;
+  width: 40%;
+  margin-left: auto;
+
+  @media screen and (max-width: 940px ) {
+    width: 60%;
+    height: 70px;
+  };
+
+  @media screen and (max-width: 480px ) {
+    width: 70%;
+    height: 50px;
+  };
+};

@@ -1,7 +1,7 @@
-import "./App.css";
 import Company from "./Pages/Company";
 import Home from "./Pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./sass/styles.scss";
 
 function App() {
   return (
