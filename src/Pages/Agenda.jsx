@@ -165,43 +165,47 @@ const Agenda = () => {
                         isThisYear(event.dates, year) && (
                           <AccordionDetails key={`event${i}`} className="event-details">
                             <h2>{event.title}</h2>
-                            {event.dates.map(
-                              (date, i) =>
-                                date.startDate.includes(year) && (
-                                  <div key={`date${i}`} className="event-date">
-                                    <p>
-                                      {new Date(date.startDate).getDate() ===
-                                      new Date(date.endDate).getDate() ? (
-                                        <span>
-                                          Le {new Date(date.startDate).getDate()}{" "}
-                                          {months[new Date(date.startDate).getMonth()]}{" "}
-                                        </span>
-                                      ) : (
-                                        <span>
-                                          Du {new Date(date.startDate).getDate()}
-                                          {new Date(date.startDate).getMonth() !==
-                                          new Date(date.endDate).getMonth() ? (
-                                            <span>
-                                              {" "}
-                                              {months[new Date(date.startDate).getMonth()]}{" "}
-                                            </span>
-                                          ) : (
-                                            <> </>
-                                          )}
-                                          au {new Date(date.endDate).getDate()}{" "}
-                                          {months[new Date(date.endDate).getMonth()]}
-                                        </span>
-                                      )}
-                                    </p>
+                            {event.dates.map((date, i) =>
+                              date.startDate.includes(year) &&
+                              (new Date(date.startDate).getFullYear() < thisYear ||
+                                (new Date(date.startDate).getFullYear() === thisYear &&
+                                  new Date(date.startDate).getMonth() < thisMonth)) ? (
+                                <div key={`date${i}`} className="event-date">
+                                  <p>
+                                    {new Date(date.startDate).getDate() ===
+                                    new Date(date.endDate).getDate() ? (
+                                      <span>
+                                        Le {new Date(date.startDate).getDate()}{" "}
+                                        {months[new Date(date.startDate).getMonth()]}{" "}
+                                      </span>
+                                    ) : (
+                                      <span>
+                                        Du {new Date(date.startDate).getDate()}
+                                        {new Date(date.startDate).getMonth() !==
+                                        new Date(date.endDate).getMonth() ? (
+                                          <span>
+                                            {" "}
+                                            {months[new Date(date.startDate).getMonth()]}{" "}
+                                          </span>
+                                        ) : (
+                                          <> </>
+                                        )}
+                                        au {new Date(date.endDate).getDate()}{" "}
+                                        {months[new Date(date.endDate).getMonth()]}
+                                      </span>
+                                    )}
+                                  </p>
 
-                                    <p>{date.place} </p>
+                                  <p>{date.place} </p>
 
-                                    <p>
-                                      {date.address ? <span>{date.address},</span> : <></>}{" "}
-                                      {date.city ? date.city : <></>}
-                                    </p>
-                                  </div>
-                                )
+                                  <p>
+                                    {date.address ? <span>{date.address},</span> : <></>}{" "}
+                                    {date.city ? date.city : <></>}
+                                  </p>
+                                </div>
+                              ) : (
+                                <div key={`date${i}`}></div>
+                              )
                             )}
                           </AccordionDetails>
                         )
