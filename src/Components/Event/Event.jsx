@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import BasicModal from "../Modal/BasicModal";
 
-const Event = ({ event, index }) => {
+const Event = ({ event, index, thisYear }) => {
   const modalRef = useRef();
   const months = [
     "Janvier",
@@ -25,7 +25,8 @@ const Event = ({ event, index }) => {
   return (
     <div className="event-div">
       {event.dates.map((date, i) =>
-        new Date(date.startDate).getMonth() === index ? (
+        new Date(date.startDate).getMonth() === index &&
+        new Date(date.startDate).getFullYear() === thisYear ? (
           <p className="event-item" key={`dates${i}`}>
             {event.description && (
               <button className="primary-button-outline see-more" onClick={showModal}>
