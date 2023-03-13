@@ -7,6 +7,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import url from "../../url";
+import { sortBy } from "lodash";
 
 const Navbar = () => {
   const [showsContent, setShowsContent] = useState(
@@ -25,22 +26,19 @@ const Navbar = () => {
     axios
       .get(`${url}/shows/shows`)
       .then((res) => {
+        const result = sortBy(res.data, "createdAt").reverse();
+
         let content = (
           <ul className="no-list-style menu-list popover-list navbar-list">
-            {res.data.map((show) =>
-              show.title !== "Test" ? (
-                <li
-                  onClick={size[0] > 1000 ? hidePopoverShows : closeMenu}
-                  key={show._id}
-                  className="pointer"
-                >
-                  {" "}
-                  <Link to={`/spectacle/${show._id}`}>{show.title}</Link>{" "}
-                </li>
-              ) : (
-                <></>
-              )
-            )}
+            {result.map((show) => (
+              <li
+                onClick={size[0] > 1000 ? hidePopoverShows : closeMenu}
+                key={show._id}
+                className="pointer"
+              >
+                <Link to={`/spectacle/${show._id}`}>{show.title}</Link>{" "}
+              </li>
+            ))}
           </ul>
         );
         setShowsContent(content);
@@ -52,21 +50,19 @@ const Navbar = () => {
     axios
       .get(`${url}/actions/actions`)
       .then((res) => {
+        const result = sortBy(res.data, "createdAt").reverse();
+
         let content = (
           <ul className="no-list-style menu-list popover-list navbar-list">
-            {res.data.map((action) =>
-              action.place !== "Test" ? (
-                <li
-                  onClick={size[0] > 1000 ? hidePopoverActions : closeMenu}
-                  key={action._id}
-                  className="pointer"
-                >
-                  <Link to={`/action-culturelle/${action._id}`}> {action.place} </Link>
-                </li>
-              ) : (
-                <></>
-              )
-            )}
+            {result.map((action) => (
+              <li
+                onClick={size[0] > 1000 ? hidePopoverActions : closeMenu}
+                key={action._id}
+                className="pointer"
+              >
+                <Link to={`/action-culturelle/${action._id}`}> {action.place} </Link>
+              </li>
+            ))}
           </ul>
         );
         setActionsContent(content);

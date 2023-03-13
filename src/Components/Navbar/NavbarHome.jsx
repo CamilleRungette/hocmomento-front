@@ -7,6 +7,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import url from "../../url";
+import { sortBy } from "lodash";
 
 const NavbarHome = () => {
   const [navbarStyle, setNavbarStyle] = useState(true);
@@ -29,9 +30,11 @@ const NavbarHome = () => {
     axios
       .get(`${url}/shows/shows`)
       .then((res) => {
+        const result = sortBy(res.data, "createdAt").reverse();
+
         let content = (
           <ul className="no-list-style menu-list popover-list navbar-list">
-            {res.data.map((show) => (
+            {result.map((show) => (
               <li
                 onClick={size[0] > 1000 ? hidePopoverShows : closeMenu}
                 key={show._id}
@@ -49,9 +52,11 @@ const NavbarHome = () => {
       });
 
     axios.get(`${url}/actions/actions`).then((res) => {
+      const result = sortBy(res.data, "createdAt").reverse();
+
       let content = (
         <ul className="no-list-style menu-list popover-list">
-          {res.data.map((action) => (
+          {result.map((action) => (
             <li
               onClick={size[0] > 1000 ? hidePopoverActions : closeMenu}
               key={action._id}
