@@ -194,6 +194,28 @@ const Agenda = () => {
                                         {months[new Date(date.endDate).getMonth()]}
                                       </span>
                                     )}
+                                    {new Date(date.startDate).getHours() ===
+                                    new Date(date.endDate).getHours() ? (
+                                      <span>
+                                        {" "}
+                                        à {new Date(date.startDate).getHours()}h{" "}
+                                        {new Date(date.startDate).getMinutes() !== 0
+                                          ? new Date(date.startDate).getMinutes()
+                                          : ""}
+                                      </span>
+                                    ) : (
+                                      <span>
+                                        {" "}
+                                        de {new Date(date.startDate).getHours()}h
+                                        {new Date(date.startDate).getMinutes() !== 0
+                                          ? new Date(date.startDate).getMinutes()
+                                          : ""}{" "}
+                                        à {new Date(date.endDate).getHours()}h
+                                        {new Date(date.startDate).getMinutes() !== 0
+                                          ? new Date(date.startDate).getMinutes()
+                                          : ""}
+                                      </span>
+                                    )}
                                   </p>
 
                                   <p>{date.place} </p>
